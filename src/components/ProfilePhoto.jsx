@@ -1,35 +1,25 @@
 import React, { useState, useRef } from 'react';
-import { User, Upload, RotateCcw, Terminal, Database, Code2, Sparkles } from 'lucide-react';
+import { Terminal, Database, Code2, Sparkles, User } from 'lucide-react';
 import { PythonIcon } from './Icons';
 
 export const ProfilePhoto = () => {
-  // Clear asset path as requested by user
-  const defaultAssetPath = '/images/aman-profile.jpg';
+  // Permanent, verified photo asset
+  const profilePhotoSrc = '/images/aman-profile.jpg';
   
-  // Track if default image failed to load
+  // Track fallback only if asset fails to load
   const [imageError, setImageError] = useState(false);
-  
-  // Custom uploaded/preview photo if user tests in-browser
-  const [customPhoto, setCustomPhoto] = useState(() => {
-    try {
-      return localStorage.getItem('aman_portfolio_photo') || null;
-    } catch {
-      return null;
-    }
-  });
 
   // 3D tilt state
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const containerRef = useRef(null);
-  const fileInputRef = useRef(null);
 
-  // Mouse move handler for lightweight, silky-smooth 3D tilt
+  // Mouse move handler for silky-smooth 3D tilt
   const handleMouseMove = (e) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left; // x position within element
-    const y = e.clientY - rect.top;  // y position within element
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
     
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
@@ -49,41 +39,6 @@ export const ProfilePhoto = () => {
     setIsHovered(false);
     setTilt({ x: 0, y: 0 });
   };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const result = event.target?.result;
-        if (typeof result === 'string') {
-          setCustomPhoto(result);
-          try {
-            localStorage.setItem('aman_portfolio_photo', result);
-          } catch {
-            // storage quota fallback
-          }
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleReset = (e) => {
-    e.stopPropagation();
-    setCustomPhoto(null);
-    try {
-      localStorage.removeItem('aman_portfolio_photo');
-    } catch {
-      // ignore
-    }
-    if (fileInputRef.current) {
-      fileInputRef.current.value = '';
-    }
-  };
-
-  // Determine active photo source
-  const activePhotoSrc = customPhoto || (!imageError ? defaultAssetPath : null);
 
   return (
     <div 
@@ -177,63 +132,30 @@ export const ProfilePhoto = () => {
               <Code2 size={12} />
               <span>aman_profile.py</span>
             </div>
-            <span className="verified-pill">Engineer</span>
+            <span className="verified-pill">Verified</span>
           </div>
 
-          {/* Photo Display / Tasteful Placeholder Area */}
-          <div 
-            className="photo-display-viewport"
-            onClick={() => fileInputRef.current?.click()}
-            title="Click to preview your real photo"
-          >
-            {/* Hidden file input for real photo upload/preview */}
-            <input
-              type="file"
-              ref={fileInputRef}
-              onChange={handleFileChange}
-              accept="image/*"
-              style={{ display: 'none' }}
-              aria-label="Upload your real professional photo"
-            />
-
-            {/* Check if image source is valid and rendering */}
-            {activePhotoSrc ? (
+          {/* Photo Display Viewport */}
+          <div className="photo-display-viewport">
+            {!imageError ? (
               <div className="photo-image-wrap">
                 <img
-                  src={activePhotoSrc}
+                  src={profilePhotoSrc}
                   alt="Aman Kumar - Python Full Stack Software Engineer"
                   className="real-profile-photo"
                   loading="eager"
                   decoding="async"
                   width="420"
                   height="440"
-                  onError={() => {
-                    setImageError(true);
-                  }}
+                  onError={() => setImageError(true)}
                 />
-                
-                {/* Overlay controls when previewing custom photo */}
-                {customPhoto && (
-                  <button
-                    type="button"
-                    className="photo-reset-button"
-                    onClick={handleReset}
-                    title="Remove custom photo preview"
-                  >
-                    <RotateCcw size={12} />
-                    <span>Reset</span>
-                  </button>
-                )}
 
                 <div className="photo-caption-strip">
                   <span className="photo-strip-dot" />
                   <span>Aman Kumar</span>
                 </div>
               </div>
-            ) : null}
-
-            {/* Tasteful Developer Placeholder (renders if no image yet or on error) */}
-            {(!activePhotoSrc || imageError) && (
+            ) : (
               <div className="tasteful-dev-placeholder">
                 <div className="placeholder-monogram-ring">
                   <div className="monogram-core">
@@ -241,26 +163,10 @@ export const ProfilePhoto = () => {
                   </div>
                   <div className="monogram-glow-spin" aria-hidden="true" />
                 </div>
-
                 <div className="placeholder-info">
-                  <span className="placeholder-pill">Professional Headshot Area</span>
                   <p className="placeholder-name">Aman Kumar</p>
-                  <p className="placeholder-asset-hint">
-                    Place photo at: <code>/public/images/aman-profile.jpg</code>
-                  </p>
+                  <p className="placeholder-asset-hint">Python Full Stack Software Engineer</p>
                 </div>
-
-                <button
-                  type="button"
-                  className="quick-upload-chip"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    fileInputRef.current?.click();
-                  }}
-                >
-                  <Upload size={13} />
-                  <span>Click to Preview Your Photo</span>
-                </button>
               </div>
             )}
           </div>

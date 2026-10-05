@@ -1,11 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { Terminal, Database, Code2, Sparkles, User } from 'lucide-react';
 import { PythonIcon } from './Icons';
+import profilePhotoSrc from '../assets/aman-profile.jpg';
 
 export const ProfilePhoto = () => {
-  // Permanent, verified photo asset
-  const profilePhotoSrc = '/images/aman-profile.jpg';
-  
   // Track fallback only if asset fails to load
   const [imageError, setImageError] = useState(false);
 

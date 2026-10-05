@@ -1,6 +1,11 @@
 # Aman Kumar — Portfolio
 
-Python Full Stack Software Engineer
+**Python Full Stack Software Engineer**
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-success?style=for-the-badge&logo=vercel)](https://amanportfolio-git-main-techcodemns-projects.vercel.app/)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/techcodemn/Aman_Portfolio)
+
+🌐 **Live Website:** [https://amanportfolio-git-main-techcodemns-projects.vercel.app/](https://amanportfolio-git-main-techcodemns-projects.vercel.app/)
 
 A modern, high-performance personal portfolio website built with React, JavaScript, and custom CSS design system. Designed specifically for software engineering applications and showcasing full-stack capabilities, backend systems, and clean architectural design.
 
@@ -10,6 +15,7 @@ A modern, high-performance personal portfolio website built with React, JavaScri
 
 Python Developer and Computer Science Engineering graduate with hands-on experience building full-stack web applications using Python, Flask, MySQL, and modern front-end technologies. Dedicated to building structured, maintainable, and scalable applications with clean APIs and reliable database architecture.
 
+- **Live URL:** [amanportfolio-git-main-techcodemns-projects.vercel.app](https://amanportfolio-git-main-techcodemns-projects.vercel.app/)
 - **Location:** Ranchi, Jharkhand, India
 - **Email:** [techcodemn@gmail.com](mailto:techcodemn@gmail.com)
 - **Phone:** [+91 9798773288](tel:+919798773288)
@@ -69,8 +75,8 @@ Python Developer and Computer Science Engineering graduate with hands-on experie
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/techcodemn/aman-kumar-portfolio.git
-cd aman-kumar-portfolio
+git clone https://github.com/techcodemn/Aman_Portfolio.git
+cd Aman_Portfolio
 ```
 
 ### 2. Install Dependencies

@@ -37,6 +37,7 @@ export const personalInfo = {
   socials: {
     linkedin: "https://www.linkedin.com/in/aman-kumar-7aa953361",
     github: "https://github.com/techcodemn",
+    liveUrl: "https://amanportfolio-git-main-techcodemns-projects.vercel.app/",
     resume: "/resume/Aman_Kumar_Resume.pdf",
   },
   stats: [
